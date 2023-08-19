@@ -1,7 +1,5 @@
 <template>
-  <div>
-    temp
-  </div>
+	<div class="flex">temp</div>
 </template>
 <script setup lang="ts"></script>
 <style lang="scss"></style>
