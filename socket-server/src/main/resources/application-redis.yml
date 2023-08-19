@@ -1,0 +1,8 @@
+spring:
+  data:
+    redis:
+      password:
+      host: localhost
+      port: 6379
+      client-type: lettuce
+      username: default
