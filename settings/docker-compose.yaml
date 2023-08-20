@@ -3,30 +3,25 @@ version: '3.9'
 services:
   redis:
     image: redis:7.0.11
-    platform: linux/amd64 # 윈도우 환경에서 실행시 주석
+    # platform: linux/amd64 # 윈도우 환경에서 실행시 주석
     container_name: byultudy_redis
-    command:
-      - "redis-server"
-      - "/usr/local/etc/redis/redis.conf"
     labels:
       - "name=redis"
       - "group=default"
     ports:
       - "6379:6379"
   mysql:
-    platform: linux/amd64 # 윈도우 환경에서 실행시 주석
+    # platform: linux/amd64 # 윈도우 환경에서 실행시 주석
     container_name: byultudy_mysql
     image: mysql:8.0
     environment:
-      - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}"
+      - "MYSQL_ROOT_PASSWORD=root"
       - "TZ=Asia/Seoul"
     ports:
       - "3306:3306"
     labels:
       - "name=mysql"
       - "group=default"
-    volumes:
-      - "${PWD}/settings/script//mysql-init.script=/docker-entrypoint-initdb.d/1.sql"
 networks:
   byultudy_net:
     driver: bridge
