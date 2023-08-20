@@ -4,7 +4,7 @@ export default defineEventHandler(event => {
 	if (!targetUrl) return;
 
 	if (targetUrl.startsWith(apiEndpoint)) {
-		const target = new URL(targetUrl, apiServerUrl as string);
+		const target = new URL(targetUrl, apiServerUrl);
 		return proxyRequest(event, target.toString(), {
 			headers: {
 				host: target.host,
