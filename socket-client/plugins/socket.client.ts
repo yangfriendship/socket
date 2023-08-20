@@ -3,9 +3,9 @@ import SockJS from "sockjs-client/dist/sockjs";
 import Stomp from "webstomp-client";
 
 export default defineNuxtPlugin(() => {
-	const { socketEndpoint } = useRuntimeConfig().public;
+	const { apiServerUrl, socketEndpoint } = useRuntimeConfig().public;
 
-	const socket = new SockJS(socketEndpoint);
+	const socket = new SockJS(apiServerUrl + socketEndpoint);
 	const stompClient = Stomp.over(socket);
 	stompClient.connect(
 		{},
