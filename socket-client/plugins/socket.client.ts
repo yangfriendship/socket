@@ -1,6 +1,7 @@
-// @ts-ignore
 import SockJS from "sockjs-client/dist/sockjs";
 import Stomp from "webstomp-client";
+const sendUriPrefix = "/pub";
+const subscribeUriPrefix = "/sub";
 
 export default defineNuxtPlugin(() => {
 	const { apiServerUrl, socketEndpoint } = useRuntimeConfig().public;
@@ -11,7 +12,7 @@ export default defineNuxtPlugin(() => {
 		{},
 		frame => {
 			console.log(frame);
-			stompClient.subscribe("/sub/echo", message => {
+			stompClient.subscribe(subscribeUriPrefix + "/echo", message => {
 				console.log("message : ", message);
 			});
 		},
@@ -22,6 +23,8 @@ export default defineNuxtPlugin(() => {
 	return {
 		provide: {
 			socket: stompClient,
+			sendUriPrefix,
+			subscribeUriPrefix,
 		},
 	};
 });

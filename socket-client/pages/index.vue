@@ -4,9 +4,9 @@
 	</div>
 </template>
 <script setup lang="ts">
-const { $socket } = useNuxtApp();
+const { $socket } = useSocket();
 const send = () => {
-	$socket.send("/pub/echo", "test");
+	$socket.send("/echo", { test: "test" });
 };
 </script>
 <style lang="scss"></style>
