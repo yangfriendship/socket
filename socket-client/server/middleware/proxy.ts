@@ -1,11 +1,23 @@
+import { RequestHeaders } from "h3";
+
+const { apiServerUrl, apiEndpoint, socketEndpoint } = useRuntimeConfig().public;
+const proxyUrls = [apiEndpoint, socketEndpoint];
 export default defineEventHandler(event => {
-    if (!event.node.req.url?.startsWith("/api")) return;
+	const targetUrl = event.node.req.url;
+	if (!targetUrl) return;
 
-    const target = new URL(event.node.req.url, "http://localhost:8080");
-
-    return proxyRequest(event, target.toString(), {
-        headers: {
-            host: target.host,
-        },
-    });
+	const shouldBeProxyRequest = proxyUrls.some(url => targetUrl.startsWith(url));
+	if (shouldBeProxyRequest) {
+		const target = new URL(targetUrl, apiServerUrl as string);
+		const headers: RequestHeaders = {
+			host: target.host,
+			...(targetUrl.startsWith(socketEndpoint) && {
+				upgrade: "websocket",
+				Connection: "Upgrade",
+			}),
+		};
+		return proxyRequest(event, target.toString(), {
+			headers,
+		});
+	}
 });

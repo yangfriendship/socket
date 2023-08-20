@@ -12,6 +12,7 @@
     "@nuxt/devtools": "latest",
     "@nuxtjs/eslint-module": "^4.1.0",
     "@types/node": "^18.17.3",
+    "@types/sockjs-client": "^1.5.1",
     "@vue/eslint-config-prettier": "^8.0.0",
     "@vue/eslint-config-typescript": "^11.0.3",
     "autoprefixer": "^10.4.15",
@@ -26,6 +27,8 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
-    "dayjs": "^1.11.9"
+    "dayjs": "^1.11.9",
+    "sockjs-client": "^1.6.1",
+    "webstomp-client": "^1.2.6"
   }
 }
